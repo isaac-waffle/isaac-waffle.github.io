@@ -1,6 +1,6 @@
 ---
 layout: author
-photo: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697495303/waffle/yfd1hw8pyrf0gocyia9a.jpg
+photo: /assets/img/uploads/profile.png
 name: Isaac
 display_name: Isaac
 position: Student
