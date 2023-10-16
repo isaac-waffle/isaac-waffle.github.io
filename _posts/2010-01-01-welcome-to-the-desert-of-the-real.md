@@ -2,7 +2,7 @@
 date: 2017-08-07 23:04:08
 layout: post
 title: Human Mortality!
-subtitle: 'Let's start!'
+subtitle: Let's start!
 description: UMMMMMM
 image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697492654/hmiqfbjpquhnzdedajq8.jpg
 optimized_image: https://res.cloudinary.com/dolc0vg7w/image/upload/c_scale,w_380/v1697492654/hmiqfbjpquhnzdedajq8.jpg
