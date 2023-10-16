@@ -7,9 +7,9 @@ description: >-
   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua.
 image: >-
-  https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg
+  [https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg](https://res.cloudinary.com/dolc0vg7w/image/upload/v1697492654/hmiqfbjpquhnzdedajq8.jpg)
 optimized_image: >-
-  https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559821647/theme6_qeeojf.jpg
+  [https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559821647/theme6_qeeojf.jpg](https://res.cloudinary.com/dolc0vg7w/image/upload/v1697492654/hmiqfbjpquhnzdedajq8.jpg)
 category: blog
 tags:
   - welcome
@@ -17,114 +17,195 @@ tags:
 author: mranderson
 paginate: true
 ---
-Cas sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
-> Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
+\##Before we start
 
-Etiam porta **sem malesuada magna** mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+We used Switzerland data.
 
-## Inline HTML elements
+We need to download some packages for graph.
 
-HTML defines a long list of available inline tags, a complete list of which can be found on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/HTML/Element).
+And then apply it.
 
-* **To bold text**, use `<strong>`.
-* *To italicize text*, use `<em>`.
-* Abbreviations, like <abbr title="HyperText Markup Langage">HTML</abbr> should use `<abbr>`, with an optional `title` attribute for the full phrase.
-* Citations, like <cite>&mdash; Thiago Rossener</cite>, should use `<cite>`.
-* <del>Deleted</del> text should use `<del>` and <ins>inserted</ins> text should use `<ins>`.
-* Superscript <sup>text</sup> uses `<sup>` and subscript <sub>text</sub> uses `<sub>`.
+    lapply(c('tidyverse','ggplot2','gganimate','gifski','directlabels','png','transformr'), require, character.only = TRUE) 
 
-Most of these elements are styled by browsers with few modifications on our part.
+Also, we need to load our ‘Switzerland data’
 
-# Heading 1
+change eunhokim into your Admin name and put our file into desktop.
 
-## Heading 2
+This path is for Mac, so if you use Windows,
 
-### Heading 3
+use file.path(path.expand(‘~’),‘Desktop’) and change path.
 
-#### Heading 4
+    life_table<- read.table('/Users/eunhokim/Desktop/swiss_mltper.txt',
+                   header = FALSE,col.names = c('Year','Age','mx' ,'qx','ax','lx','dx','Lx','Tx','ex')
+                   ,stringsAsFactors=FALSE)
 
-Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Now, this data is written by character so we convert this to numerical
+data and omit NA values.
 
---page-break--
+    life_table<-life_table[-1,]
+    life_table<- as.data.frame(apply(life_table, 2, as.numeric))
 
-## Code
+    ## Warning in apply(life_table, 2, as.numeric): NAs introduced by coercion
 
-Cum sociis natoque penatibus et magnis dis `code element` montes, nascetur ridiculus mus.
+    life_table<-na.omit(life_table)
 
-```js
-// Example can be run directly in your JavaScript console
+## Question 2
 
-// Create a function that takes two arguments and returns the sum of those arguments
-var adder = new Function("a", "b", "return a + b");
+\#a: *μ**x**t* the force of mortality of an (x) year old in year t,
+versus x, for different selected time periods t
 
-// Call the function
-adder(2, 6);
-// > 8
-```
+Below graph, we can find mortality rate of age in 2021
 
-Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.
+    with(subset(life_table,life_table$Year == 2021),
+         plot(Age,log(mx),
+              main='force of mortality of an (x) year old in 2021',
+              xlab='age x',
+              ylab=expression(paste('log mortality rate')),
+              type='l'))
 
-## Lists
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+If we want to compare mortality rate with 10 year period:
 
-* Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-* Donec id elit non mi porta gravida at eget metus.
-* Nulla vitae elit libero, a pharetra augue.
+    k<-seq(1876,2021,10)
+    b<-subset(life_table,life_table$Year==k)
 
-Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.
+    ## Warning in life_table$Year == k: longer object length is not a multiple of
+    ## shorter object length
 
-1. Vestibulum id ligula porta felis euismod semper.
-2. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-3. Maecenas sed diam eget risus varius blandit sit amet non magna.
+    ggplot(data = b)+
+      geom_line(mapping = aes(x = Age, y = log(mx)))+
+      facet_wrap(~Year,nrow=4)
 
-Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
-Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.
+If we want to compare from 1886 until 2021:
 
-## Images
+    life_table_a = life_table[life_table$mx > 0,]
+    Moving_Graph <- ggplot(
+      life_table_a, 
+      aes(x = Age, y=log(mx))) +
+      geom_line(show.legend = FALSE, alpha = 10) +
+      labs(x = "Age", y = "log mortality rate")+
+      scale_y_continuous(limits = c(-15,0), breaks = seq(-15,0,5))
+    Moving_Graph + transition_time(Year) +
+      labs(title = "Year: {frame_time}")
 
-Quisque consequat sapien eget quam rhoncus, sit amet laoreet diam tempus. Aliquam aliquam metus erat, a pulvinar turpis suscipit at.
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-6-1.gif)
 
-![placeholder](https://placehold.it/800x400 "Large example image") ![placeholder](https://placehold.it/400x200 "Medium example image") ![placeholder](https://placehold.it/200x200 "Small example image")
+\#b: *μ**x*,*t* versus t, for different selected ages x
 
-## Tables
+Below graph, we can find mortality rate of Year in age 20
 
-Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    with(subset(life_table,life_table$Age==20),
+         plot(Year,log(mx),
+              main='force of mortality of an 20 year old at Year t',
+              xlab='Year',
+              ylab=expression(paste('log mortality rate')),
+              type='l'))
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Upvotes</th>
-      <th>Downvotes</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <td>Totals</td>
-      <td>21</td>
-      <td>23</td>
-    </tr>
-  </tfoot>
-  <tbody>
-    <tr>
-      <td>Alice</td>
-      <td>10</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <td>Bob</td>
-      <td>4</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>Charlie</td>
-      <td>7</td>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
-Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo.
+Below graph, we can find mortality rate of Year in age 50
+
+    with(subset(life_table,life_table$Age==50),
+         plot(Year,log(mx),
+              main='force of mortality of an 50 year old at Year t',
+              xlab='Year',
+              ylab=expression(paste('log mortality rate')),
+              type='l'))
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
+If we want to compare mortality rate with 10 year period from 0 to 80
+year:
+
+    l<-c(0,10,20,30,40,50,60,70,80)
+    c<-subset(life_table,life_table$Age==l)
+
+    ## Warning in life_table$Age == l: longer object length is not a multiple of
+    ## shorter object length
+
+    ggplot(data = c)+
+      geom_line(mapping = aes(x = Year, y = log(mx)))+
+      facet_wrap(~Age,nrow=3)
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
+If we want to compare from 1886 until 2020
+
+    life_table_b = life_table[life_table$mx > 0,]
+    Moving_Graph <- ggplot(
+      life_table_b, 
+      aes(x = Year, y=log(mx))) +
+      geom_line(show.legend = FALSE, alpha = 10) +
+      labs(x = "Year", y = "log mortality rate")+
+      scale_y_continuous(limits = c(-15,0), breaks = seq(-15,0,2.5))
+    Moving_Graph + transition_time(Age) +
+      labs(title = "Age: {frame_time}")
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-10-1.gif)
+
+\#c: The survival function S0,t(x) of a newborn, when using data from
+different selected time periods t
+
+Survival function in 2010
+
+    with(subset(life_table,life_table$Year == 2010),
+         plot(Age,lx/lx[1],
+              main='survival function S_0_t(x) of a newborn in 2010',
+              xlab='Age',
+              ylab=expression(paste('S_0_t(x)')),
+              type='l'))
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+
+If we want to compare survival function with 10 year period:
+
+    k<-seq(1876,2021,10)
+    b<-subset(life_table,life_table$Year==k)
+
+    ## Warning in life_table$Year == k: longer object length is not a multiple of
+    ## shorter object length
+
+    ggplot(data = b)+
+      geom_line(mapping = aes(x = Age, y =lx/lx[1]))+
+      facet_wrap(~Year,nrow=4)
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+
+If we want to compare from 1886 until 2020
+
+    life_table_a = life_table[life_table$mx > 0,]
+    Moving_Graph <- ggplot(
+      life_table_a, 
+      aes(x = Age, y=lx/lx[1])) +
+      geom_line(show.legend = FALSE, alpha = 10) +
+      labs(x = "Age", y = "Survival function S_0")+
+      scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.25))
+    Moving_Graph + transition_time(Year) +
+      labs(title = "Year: {frame_time}")
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-13-1.gif)
+
+\#d: my own graph
+
+I want to compute life expectancy versus age with diffrent Year
+
+    life_table_a = life_table[life_table$mx > 0,]
+    Moving_Graph <- ggplot(
+      life_table_a, 
+      aes(x = Age, y=ex)) +
+      geom_line(show.legend = FALSE, alpha = 10) +
+      labs(x = "Age", y = "life expectancy")+
+      scale_y_continuous(limits = c(0,100), breaks = seq(0,100,20))
+    Moving_Graph + transition_time(Year) +
+      labs(title = "Year: {frame_time}")
+
+![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-14-1.gif)
+
+Above graph, we can find that the life expectancy has positive
+relationship with Year.
+
+Also, if age increases, expectancy decreases.
