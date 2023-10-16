@@ -11,7 +11,6 @@ tags:
   - R
   - ActuarialScience
 author: mranderson
-paginate: true
 ---
 
 \##Before we start
