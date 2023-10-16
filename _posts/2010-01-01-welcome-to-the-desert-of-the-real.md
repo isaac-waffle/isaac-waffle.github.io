@@ -8,8 +8,8 @@ image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697492654/hmiqfbjpquh
 optimized_image: https://res.cloudinary.com/dolc0vg7w/image/upload/c_scale,w_380/v1697492654/hmiqfbjpquhnzdedajq8.jpg
 category: blog
 tags:
-  - R
-  - ActuarialScience
+  - crazy
+  - story
 author: mranderson
 ---
 
