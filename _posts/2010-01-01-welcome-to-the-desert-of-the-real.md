@@ -44,7 +44,6 @@ data and omit NA values.
 
     life_table<-na.omit(life_table)
 
-## Question 2
 
 \#a: *μ**x**t* the force of mortality of an (x) year old in year t,
 versus x, for different selected time periods t
