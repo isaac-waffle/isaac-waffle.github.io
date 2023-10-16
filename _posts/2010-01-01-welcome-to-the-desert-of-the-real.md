@@ -4,8 +4,8 @@ layout: post
 title: Human Mortality!
 subtitle: Let's start!
 description: UMMMMMM
-image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg
-optimized_image: https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559821647/theme6_qeeojf.jpg
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697494916/waffle/dgpkqgevqf5hnn7ipmrd.jpg
+optimized_image: https://res.cloudinary.com/dolc0vg7w/image/upload/c_scale,w_380/v1697494916/waffle/dgpkqgevqf5hnn7ipmrd.jpg
 category: blog
 tags:
   - crazy
