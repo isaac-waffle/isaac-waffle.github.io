@@ -3,13 +3,9 @@ date: 2019-05-16T23:48:05.000Z
 layout: post
 title: Human Mortality!
 subtitle: 'Let's start!'
-description: >-
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua.
-image: >-
-  https://res.cloudinary.com/dolc0vg7w/image/upload/v1697492654/hmiqfbjpquhnzdedajq8.jpg
-optimized_image: >-
-  https://res.cloudinary.com/dolc0vg7w/image/upload/c_scale,w_380/v1697492654/hmiqfbjpquhnzdedajq8.jpg
+description: UMMMMMM
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697492654/hmiqfbjpquhnzdedajq8.jpg
+optimized_image: https://res.cloudinary.com/dolc0vg7w/image/upload/c_scale,w_380/v1697492654/hmiqfbjpquhnzdedajq8.jpg
 category: blog
 tags:
   - R
