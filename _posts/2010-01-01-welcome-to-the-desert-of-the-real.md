@@ -10,6 +10,7 @@ tags:
   - crazy
   - story
 author: mranderson
+math: true
 ---
 
 \##Before we start
