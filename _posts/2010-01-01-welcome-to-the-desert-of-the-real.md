@@ -9,7 +9,7 @@ category: blog
 tags:
   - crazy
   - story
-author: mranderson
+author: isaac
 math: true
 ---
 
