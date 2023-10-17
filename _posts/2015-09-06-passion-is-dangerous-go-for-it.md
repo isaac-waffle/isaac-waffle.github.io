@@ -1,7 +1,7 @@
 ---
 date: 2015-09-06 12:00:00
 layout: post
-title: Passion is dangerous, go for it!
+title: DEMO_15
 subtitle: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825288/theme17_nlndhx.jpg
