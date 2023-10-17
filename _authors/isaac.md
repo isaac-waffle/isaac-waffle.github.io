@@ -2,7 +2,7 @@
 layout: author
 photo: /assets/img/uploads/profile.png
 name: isaac
-display_name: HI! isaac
+display_name: Hi! isaac
 position: Student
 bio: Bachelor's degree on Econometrics and Data Science, University of Amsterdam
 github_username: isaac-waffle
