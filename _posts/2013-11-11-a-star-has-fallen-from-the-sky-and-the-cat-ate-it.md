@@ -1,6 +1,6 @@
 ---
 date: 2017-08-07 23:04:08
-layout: blog
+layout: post
 title: DEMO_08
 subtitle: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
