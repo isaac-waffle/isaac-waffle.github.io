@@ -1,6 +1,6 @@
 ---
 date: 2017-08-07 23:04:08
-layout: post
+layout: DEMO_08
 title: A star has fallen from the sky and the cat ate it
 subtitle: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
