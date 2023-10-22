@@ -17,10 +17,6 @@ paginate: true
 <img src="assets/img/life/test_123.gif" width="250" height="250"/>
 
 
-
-
-<!--page-->
-
 ## Inline HTML elements
 
 HTML defines a long list of available inline tags, a complete list of which can be found on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/HTML/Element).
