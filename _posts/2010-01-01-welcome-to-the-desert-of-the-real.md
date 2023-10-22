@@ -15,7 +15,8 @@ math: true
 
 In this post, I will show how to make moving graphs for human mortality.
 
-![](https://github.com/isaac-waffle/isaac-waffle.github.io/tree/master/assets/img/life/test_123.gif)
+![](https://github.com/isaac-waffle/isaac-waffle.github.io/blob/master/assets/img/life/test_123.gif)
+
 
 
 \##Before we start
