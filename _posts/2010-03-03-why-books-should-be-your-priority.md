@@ -14,7 +14,7 @@ author: mranderson
 paginate: true
 ---
 
-<img src="assets/img/life/test_123.gif" width="250" height="250"/>
+![myfile](https://github.com/isaac-waffle/isaac-waffle.github.io/blob/master/assets/img/life/test_123.gif)
 
 
 ## Inline HTML elements
