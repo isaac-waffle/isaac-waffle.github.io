@@ -49,7 +49,7 @@ two_columns_layout: true
 # Advanced Settings
 baseurl: ""
 url: "https://isaac-waffle.github.io" # the base hostname & protocol for your site
-google_analytics: "UA-XXXXXXXX-X"
+google_analytics: "G-LF9100HZBE"
 language: "en"
 categories_folder: category
 sent_message_url: "/contact/message-sent/"
