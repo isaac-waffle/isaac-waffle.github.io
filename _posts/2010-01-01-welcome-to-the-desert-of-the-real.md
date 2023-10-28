@@ -19,6 +19,7 @@ In this post, I will show how to make moving graphs for human mortality.
 
 <img src="https://github.com/isaac-waffle/isaac-waffle.github.io/blob/master/assets/img/life/test_123.gif", style="width:200px">
 
+![Test_01](https://res.cloudinary.com/dm7h7e8xj/image/upload/v1566390829/jekflix-screenshot-2_zfiog2.jpg)
 
 
 \##Before we start
