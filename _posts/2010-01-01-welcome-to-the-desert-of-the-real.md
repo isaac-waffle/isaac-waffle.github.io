@@ -21,6 +21,9 @@ In this post, I will show how to make moving graphs for human mortality.
 
 ![Test_01](https://res.cloudinary.com/dm7h7e8xj/image/upload/v1566390829/jekflix-screenshot-2_zfiog2.jpg)
 
+![Test_02](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698490456/waffle/clux4ecus7tavwdik1lf.gif)
+
+
 
 \##Before we start
 
