@@ -16,7 +16,7 @@ math: true
 
 ![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/fm3ojrnnpoqpbllih6cd.gif)
 
-Switzerland is renowned for its high standard of living, excellent healthcare system, and robust social safety net. Life expectancy in Switzerland has consistently been on the higher end, and the country boasts a low infant mortality rate. The Swiss healthcare system is celebrated for its quality and accessibility. In this post, we will examine how Switzerland's human mortality has evolved over time and highlight key findings.
+Switzerland is renowned for its high standard of living, excellent healthcare system, and robust social safety net. Life expectancy in Switzerland has consistently been on the higher end, and the country boasts a low infant mortality rate. The Swiss healthcare system is celebrated for its quality and accessibility. In this post, I will examine how Switzerland's human mortality has evolved over time and highlight key findings.
 
 ## Before we start
 
@@ -92,7 +92,7 @@ legend("bottomright", legend = c("US", "Switzerland"), col = c("deepskyblue2", "
 
 ![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/qponrkgirjqnypbbombb.png)
 
-The provided graph illustrates that Switzerland generally exhibits a lower mortality rate compared to the United States. Furthermore, a notably pronounced disparity is evident in neonatal mortality, and a substantial difference is also observed between the ages of 20 and 60.
+The provided graph illustrates that Switzerland generally exhibits a lower mortality rate compared to the United States.
 
 The graph below illustrates the dynamics of Switzerland from 1886 to 2021:
 
@@ -192,23 +192,6 @@ Well, of course, as humans get older, the mortality rate increases.
 # What is survival function?
 
 The survival function, often denoted as S(t), is a fundamental concept in survival analysis, which is a branch of statistics used to analyze time-to-event data, particularly in the context of studying the survival or failure of subjects or entities over time.
-
-The survival function S_0,t(x) of a newborn, when using data from different selected
-time periods t
-
-Survival function in 2010
-
-
-```{r}
-with(subset(life_table,life_table$Year == 2010),
-     plot(Age,lx/lx[1],
-          main='survival function S_0_t(x) of a newborn in 2010',
-          xlab='Age',
-          ylab=expression(paste('S_0_t(x)')),
-          type='l'))
-```
-
-![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/pwikzat2eqhcjcqe8vwu.png)
 
 Survival function from 1886 to 2021.
 
