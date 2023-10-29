@@ -18,7 +18,7 @@ math: true
 
 Switzerland is renowned for its high standard of living, excellent healthcare system, and robust social safety net. Life expectancy in Switzerland has consistently been on the higher end, and the country boasts a low infant mortality rate. The Swiss healthcare system is celebrated for its quality and accessibility. In this post, we will examine how Switzerland's human mortality has evolved over time and highlight key findings.
 
-##Before we start
+## Before we start
 
 I utilized data from the Human Mortality Database, available at www.mortality.org. Additionally, some R packages are necessary to create and display dynamic moving graphs.
 
@@ -58,7 +58,7 @@ life_table_US<-na.omit(life_table_US)
 
 
 
-#What is force of mortality?
+# What is force of mortality?
 
 
 $μ_{x,t}$, the force of mortality, is a concept used in actuarial science and demography. It represents the rate at which members of a given population who are currently at age x will die before reaching age (x + 1) within a specific time interval t. In other words, it quantifies the risk of death for individuals at a particular age x during the time period t.
@@ -189,7 +189,7 @@ Well, of course, as humans get older, the mortality rate increases.
 
 
 
-#What is survival function?
+# What is survival function?
 
 The survival function, often denoted as S(t), is a fundamental concept in survival analysis, which is a branch of statistics used to analyze time-to-event data, particularly in the context of studying the survival or failure of subjects or entities over time.
 
@@ -242,7 +242,7 @@ anim_plot
 
 ![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584484/waffle/life/q1sj50g8w6vdmemuypcg.gif)
 
-#So, how long can I live?
+# So, how long can I live?
 
 Whether we consider survival rates or mortality rates, it may be to vague to our real life. Fundamental question that often arises to us is, 'So, How long can I expect to live?' Many individuals seek answers to this query, and it remains a topic of great curiosity among us humans.
 
