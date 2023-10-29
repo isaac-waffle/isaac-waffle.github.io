@@ -94,7 +94,7 @@ legend("bottomright", legend = c("US", "Switzerland"), col = c("deepskyblue2", "
 
 The provided graph illustrates that Switzerland generally exhibits a lower mortality rate compared to the United States.
 
-The graph below illustrates the dynamics of Switzerland from 1886 to 2021:
+The graph below illustrates the dynamics of Switzerland from 1886 to 2021
 
 ```{r}
 life_table_a = life_table[life_table$mx > 0,]
