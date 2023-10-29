@@ -1,9 +1,9 @@
 ---
 date: 2023-10-01 12:26:40
 layout: post
-title: Human Mortality!
-subtitle: Let's start!
-description: UMMMMMM
+title: Human Mortality?!
+subtitle: Dynamic analyses of mortality
+description: life Insurance
 image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697496291/waffle/cvw2xf6zmoebdtkgwcb6.png
 category: blog
 tags:
@@ -13,205 +13,318 @@ author: isaac
 math: true
 ---
 
-In this post, I will show how to make moving graphs for human mortality.
 
-![](https://github.com/isaac-waffle/isaac-waffle.github.io/blob/master/assets/img/life/test_123.gif)
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/fm3ojrnnpoqpbllih6cd.gif)
 
-<img src="https://github.com/isaac-waffle/isaac-waffle.github.io/blob/master/assets/img/life/test_123.gif", style="width:200px">
+Switzerland is renowned for its high standard of living, excellent healthcare system, and robust social safety net. Life expectancy in Switzerland has consistently been on the higher end, and the country boasts a low infant mortality rate. The Swiss healthcare system is celebrated for its quality and accessibility. In this post, we will examine how Switzerland's human mortality has evolved over time and highlight key findings.
 
-![Test_01](https://res.cloudinary.com/dm7h7e8xj/image/upload/v1566390829/jekflix-screenshot-2_zfiog2.jpg)
+##Before we start
 
-![Test_02](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698490456/waffle/clux4ecus7tavwdik1lf.gif)
-
+I utilized data from the Human Mortality Database, available at www.mortality.org. Additionally, some R packages are necessary to create and display dynamic moving graphs.
 
 
-\##Before we start
+```{r}
+lapply(c('tidyverse','ggplot2','gganimate','gifski','directlabels','png','transformr','gganimate'), require, character.only = TRUE) 
+```
 
-We used Switzerland data.
-
-We need to download some packages for graph.
-
-And then apply it.
-
-    lapply(c('tidyverse','ggplot2','gganimate','gifski','directlabels','png','transformr'), require, character.only = TRUE) 
-
-Also, we need to load our ‘Switzerland data’
-
-change eunhokim into your Admin name and put our file into desktop.
-
-This path is for Mac, so if you use Windows,
-
-use file.path(path.expand(‘~’),‘Desktop’) and change path.
-
-    life_table<- read.table('/Users/eunhokim/Desktop/swiss_mltper.txt',
-                   header = FALSE,col.names = c('Year','Age','mx' ,'qx','ax','lx','dx','Lx','Tx','ex')
-                   ,stringsAsFactors=FALSE)
-
-Now, this data is written by character so we convert this to numerical
-data and omit NA values.
-
-    life_table<-life_table[-1,]
-    life_table<- as.data.frame(apply(life_table, 2, as.numeric))
-
-    ## Warning in apply(life_table, 2, as.numeric): NAs introduced by coercion
-
-    life_table<-na.omit(life_table)
+Furthermore, we should load the 'Switzerland data,' with 'America data' serving as the comparative index.
 
 
-\#a: *μ**x**t* the force of mortality of an (x) year old in year t,
-versus x, for different selected time periods t
+```{r}
+life_table<- read.table('~/Desktop/swiss_mltper.txt',
+               header = FALSE,col.names = c('Year','Age','mx' ,'qx','ax','lx','dx','Lx','Tx','ex')
+               ,stringsAsFactors=FALSE)
+```
 
-Below graph, we can find mortality rate of age in 2021
+```{r}
+life_table_US<- read.table('~/Desktop/US_mltper.txt',
+               header = FALSE,col.names = c('Year','Age','mx' ,'qx','ax','lx','dx','Lx','Tx','ex')
+               ,stringsAsFactors=FALSE)
+```
 
-    with(subset(life_table,life_table$Year == 2021),
-         plot(Age,log(mx),
-              main='force of mortality of an (x) year old in 2021',
-              xlab='age x',
-              ylab=expression(paste('log mortality rate')),
-              type='l'))
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+Now, this data is in character format, so it need to be converted into numerical data and remove any NA values for data analysis and ease of access.
 
-If we want to compare mortality rate with 10 year period:
+```{r}
 
-    k<-seq(1876,2021,10)
-    b<-subset(life_table,life_table$Year==k)
+life_table<-life_table[-1,]
+life_table<- as.data.frame(apply(life_table, 2, as.numeric))
+life_table<-na.omit(life_table)
 
-    ## Warning in life_table$Year == k: longer object length is not a multiple of
-    ## shorter object length
+life_table_US<-life_table_US[-1,]
+life_table_US<- as.data.frame(apply(life_table_US, 2, as.numeric))
+life_table_US<-na.omit(life_table_US)
+```
 
-    ggplot(data = b)+
-      geom_line(mapping = aes(x = Age, y = log(mx)))+
-      facet_wrap(~Year,nrow=4)
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
-If we want to compare from 1886 until 2021:
+#What is force of mortality?
 
-    life_table_a = life_table[life_table$mx > 0,]
-    Moving_Graph <- ggplot(
-      life_table_a, 
-      aes(x = Age, y=log(mx))) +
-      geom_line(show.legend = FALSE, alpha = 10) +
-      labs(x = "Age", y = "log mortality rate")+
-      scale_y_continuous(limits = c(-15,0), breaks = seq(-15,0,5))
-    Moving_Graph + transition_time(Year) +
-      labs(title = "Year: {frame_time}")
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-6-1.gif)
+$μ_{x,t}$, the force of mortality, is a concept used in actuarial science and demography. It represents the rate at which members of a given population who are currently at age x will die before reaching age (x + 1) within a specific time interval t. In other words, it quantifies the risk of death for individuals at a particular age x during the time period t.
 
-\#b: *μ**x*,*t* versus t, for different selected ages x
+Below graph, mortality rate of age in 2021 can be found.
 
-Below graph, we can find mortality rate of Year in age 20
+```{r}
+with(subset(life_table,life_table$Year == 2021),
+     plot(Age,log(mx),
+          main='force of mortality of an (x) year old in 2021',
+          xlab='age x',
+          ylab=expression(paste('log mortality rate')),
+          type='l',col="forestgreen",lwd=2))
+```
 
-    with(subset(life_table,life_table$Age==20),
-         plot(Year,log(mx),
-              main='force of mortality of an 20 year old at Year t',
-              xlab='Year',
-              ylab=expression(paste('log mortality rate')),
-              type='l'))
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/pqpogmj8k5cr8212gwss.png)
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+```{r}
+subset_data <- subset(life_table, life_table$Year == 2021)
+subset_data_US <- subset(life_table_US, life_table_US$Year == 2021)
 
-Below graph, we can find mortality rate of Year in age 50
+plot(subset_data_US$Age, log(subset_data_US$mx),
+     main = 'Force of Mortality of an (x) Year Old in 2021',
+     xlab = 'Age (x)',
+     ylab = expression(paste('log Mortality Rate')),
+     type = 'l', col = "deepskyblue2", lwd = 2,
+     ylim=c(-12,0))
+lines(subset_data$Age, log(subset_data$mx), col = "forestgreen", lwd = 2)
+legend("bottomright", legend = c("US", "Switzerland"), col = c("deepskyblue2", "forestgreen"), lwd = 2)
+```
 
-    with(subset(life_table,life_table$Age==50),
-         plot(Year,log(mx),
-              main='force of mortality of an 50 year old at Year t',
-              xlab='Year',
-              ylab=expression(paste('log mortality rate')),
-              type='l'))
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/qponrkgirjqnypbbombb.png)
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+The provided graph illustrates that Switzerland generally exhibits a lower mortality rate compared to the United States. Furthermore, a notably pronounced disparity is evident in neonatal mortality, and a substantial difference is also observed between the ages of 20 and 60.
 
-If we want to compare mortality rate with 10 year period from 0 to 80
-year:
+The graph below illustrates the dynamics of Switzerland from 1886 to 2021:
 
-    l<-c(0,10,20,30,40,50,60,70,80)
-    c<-subset(life_table,life_table$Age==l)
+```{r}
+life_table_a = life_table[life_table$mx > 0,]
 
-    ## Warning in life_table$Age == l: longer object length is not a multiple of
-    ## shorter object length
+Moving_Graph <- ggplot(
+  life_table_a, 
+  aes(x = Age, y=log(mx),frame=Year,color=Year)) +
+  geom_line(show.legend = FALSE, alpha = 10,size=1) +
+  labs(x = "Age", y = "log mortality rate")+
+  scale_y_continuous(limits = c(-15,0), breaks = seq(-15,0,2.5))+
+  scale_color_gradient(low = "red", high = "blue")+
+  theme_minimal()+
+  theme(legend.position = "bottom") +  # Legend position
+  guides(color = guide_legend(title = "Year")) +  # Legend title
+  labs(title = "Year: {round(frame_time)}") +
+  theme(plot.title = element_text(hjust = 0.5)  # Center title
+  )
 
-    ggplot(data = c)+
-      geom_line(mapping = aes(x = Year, y = log(mx)))+
-      facet_wrap(~Age,nrow=3)
+anim_plot <- Moving_Graph + transition_time(Year)
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+anim_plot
+```
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/obvqe6mqz9u8sbfiwami.gif)
 
-If we want to compare from 1886 until 2020
 
-    life_table_b = life_table[life_table$mx > 0,]
-    Moving_Graph <- ggplot(
-      life_table_b, 
-      aes(x = Year, y=log(mx))) +
-      geom_line(show.legend = FALSE, alpha = 10) +
-      labs(x = "Year", y = "log mortality rate")+
-      scale_y_continuous(limits = c(-15,0), breaks = seq(-15,0,2.5))
-    Moving_Graph + transition_time(Age) +
-      labs(title = "Age: {frame_time}")
+This dynamic graph presents insightful information. Firstly, it highlights a significant reduction in infant mortality and a gradual decline in mortality rates among younger generations. What are the factors contributing to this decline in mortality?
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-10-1.gif)
+Advances in Healthcare: Over the decades, substantial progress has been made in medical science, healthcare infrastructure, and access to healthcare services. These advancements have translated into improved treatments, early disease detection, and overall better healthcare outcomes.
 
-\#c: The survival function S0,t(x) of a newborn, when using data from
-different selected time periods t
+Disease Control: Switzerland, much like other developed nations, has made remarkable effort in controlling and preventing infectious diseases. Key initiatives, such as vaccination programs, public health campaigns, and sanitation improvements, have played pivotal roles in diminishing disease-related mortality.
+
+Lifestyle and Behavior: Shifts in lifestyle choices, including decreased smoking rates, healthier habits, and increased physical activity, have significantly contributed to improved overall health and a reduced risk of chronic diseases.
+
+Additionally, it is noteworthy that one of the most crucial factors is the absence of war since Switzerland has enjoyed political stability and neutrality for many decades. This peaceful environment has not only preserved human lives but has also created a conducive atmosphere for economic prosperity, healthcare development, and overall well-being.
+
+
+
+Below graph, mortality rate of Year in age 20 and 50 can be found
+
+```{r}
+with(subset(life_table,life_table$Age==20),
+     plot(Year,log(mx),
+          main='force of mortality of an 20 year old at Year t',
+          xlab='Year',
+          ylab=expression(paste('log mortality rate')),
+          type='l',lwd=3))
+```
+
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/vgqddlsj5pxiiwiei2gi.png)
+
+```{r}
+with(subset(life_table,life_table$Age==50),
+     plot(Year,log(mx),
+          main='force of mortality of an 50 year old at Year t',
+          xlab='Year',
+          ylab=expression(paste('log mortality rate')),
+          type='l',lwd=3))
+```
+
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/t0ojwigbp24eagdpoxpk.png)
+
+Dynamics of human mortality with difference ages.
+
+```{r}
+life_table_b = life_table[life_table$mx > 0,]
+
+frames <- unique(life_table_b$Age)
+
+
+Moving_Graph <- ggplot(
+  life_table_b, 
+  aes(x = Year, y=log(mx),frame=Age,color=Age)) +
+  geom_line(show.legend = FALSE, alpha = 10,size=1) +
+  labs(x = "Year", y = "log mortality rate")+
+  scale_y_continuous(limits = c(-15,0), breaks = seq(-15,0,2.5))+
+  scale_color_gradient(low = "red", high = "blue")+
+  theme_minimal()+
+  theme(legend.position = "bottom") +  # Legend position
+  guides(color = guide_legend(title = "Age")) +  # Legend title
+  labs(title = "Age: {round(frame_time)}") +
+  theme(plot.title = element_text(hjust = 0.5)  # Center title
+  )
+
+anim_plot <- Moving_Graph + transition_time(Age)
+
+anim_plot
+```
+
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/ujqmcdvgwxo5rm36t6ty.gif)
+
+Well, of course, as humans get older, the mortality rate increases.
+
+
+
+#What is survival function?
+
+The survival function, often denoted as S(t), is a fundamental concept in survival analysis, which is a branch of statistics used to analyze time-to-event data, particularly in the context of studying the survival or failure of subjects or entities over time.
+
+The survival function S_0,t(x) of a newborn, when using data from different selected
+time periods t
 
 Survival function in 2010
 
-    with(subset(life_table,life_table$Year == 2010),
-         plot(Age,lx/lx[1],
-              main='survival function S_0_t(x) of a newborn in 2010',
-              xlab='Age',
-              ylab=expression(paste('S_0_t(x)')),
-              type='l'))
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+```{r}
+with(subset(life_table,life_table$Year == 2010),
+     plot(Age,lx/lx[1],
+          main='survival function S_0_t(x) of a newborn in 2010',
+          xlab='Age',
+          ylab=expression(paste('S_0_t(x)')),
+          type='l'))
+```
 
-If we want to compare survival function with 10 year period:
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584463/waffle/life/pwikzat2eqhcjcqe8vwu.png)
 
-    k<-seq(1876,2021,10)
-    b<-subset(life_table,life_table$Year==k)
+Survival function from 1886 to 2021.
 
-    ## Warning in life_table$Year == k: longer object length is not a multiple of
-    ## shorter object length
+```{r}
+library(ggplot2)
+library(gganimate)
 
-    ggplot(data = b)+
-      geom_line(mapping = aes(x = Age, y =lx/lx[1]))+
-      facet_wrap(~Year,nrow=4)
+# Assuming you have a life_table data frame with columns 'Age', 'lx', 'Year'
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+life_table_c <- life_table[life_table$mx > 0,]
 
-If we want to compare from 1886 until 2020
+Moving_Graph <- ggplot(
+  life_table_c, 
+  aes(x = Age, y = lx/lx[1], frame = Year, color = Year)) +
+  geom_line(show.legend = FALSE, alpha = 0.8, size = 1) +
+  labs(x = "Age", y = "Survival function S_0") +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.25)) +
+  scale_color_gradient(low = "red", high = "blue") +  # Color palette
+  theme_minimal() +  # Background
+  theme(legend.position = "bottom") +  # Legend position
+  guides(color = guide_legend(title = "Year")) +  # Legend title
+  labs(title = "Year: {round(frame_time)}") +
+  theme(plot.title = element_text(hjust = 0.5)  # Center title
+  )
 
-    life_table_a = life_table[life_table$mx > 0,]
-    Moving_Graph <- ggplot(
-      life_table_a, 
-      aes(x = Age, y=lx/lx[1])) +
-      geom_line(show.legend = FALSE, alpha = 10) +
-      labs(x = "Age", y = "Survival function S_0")+
-      scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.25))
-    Moving_Graph + transition_time(Year) +
-      labs(title = "Year: {frame_time}")
+anim_plot <- Moving_Graph + transition_time(Year)
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-13-1.gif)
+anim_plot
 
-\#d: my own graph
+```
 
-I want to compute life expectancy versus age with diffrent Year
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584484/waffle/life/q1sj50g8w6vdmemuypcg.gif)
 
-    life_table_a = life_table[life_table$mx > 0,]
-    Moving_Graph <- ggplot(
-      life_table_a, 
-      aes(x = Age, y=ex)) +
-      geom_line(show.legend = FALSE, alpha = 10) +
-      labs(x = "Age", y = "life expectancy")+
-      scale_y_continuous(limits = c(0,100), breaks = seq(0,100,20))
-    Moving_Graph + transition_time(Year) +
-      labs(title = "Year: {frame_time}")
+#So, how long can I live?
 
-![](group47_LM_assignment2_files/figure-markdown_strict/unnamed-chunk-14-1.gif)
+Whether we consider survival rates or mortality rates, it may be to vague to our real life. Fundamental question that often arises to us is, 'So, How long can I expect to live?' Many individuals seek answers to this query, and it remains a topic of great curiosity among us humans.
 
-Above graph, we can find that the life expectancy has positive
-relationship with Year.
+To begin, let's explore the general life expectancy in Switzerland. Later on, I will provide an estimate of life expectancy for each country, which can give you an idea of how long you might live. However, it's crucial to approach this information with caution.
 
-Also, if age increases, expectancy decreases.
+It's important to note that this data does not predict your personal future. Instead, it offers insights into average life expectancy based on existing statistics and historical data. Remember, Life is precious, and how we live it matters more than how long we live.
+
+Life expectancy versus age with different Year in Switzerland
+
+```{r}
+
+life_table_d <- life_table[life_table$mx > 0,]
+
+Moving_Graph <- ggplot(
+  life_table_d, 
+  aes(x = Age, y = ex, frame = Year, color = Year)) +
+  geom_line(show.legend = FALSE, alpha = 0.8, size = 1) +
+  labs(x = "Age", y = "Life Expectancy") +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10)) +
+  scale_color_gradient(low = "red", high = "blue") +  # Color palette
+  theme_minimal() +  # Background
+  theme(legend.position = "bottom") +  # Legend position
+  guides(color = guide_legend(title = "Year")) +  # Legend title
+  labs(title = "Year: {round(frame_time)}") +
+  theme(plot.title = element_text(hjust = 0.5))  # Center title
+
+Moving_Graph + transition_time(life_table_d$Year)
+
+
+```
+
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/vjekwhkpmhty5hjr7fd6.gif)
+
+Analyzing life expectancy in relation to population trends across various years in different continent.
+
+```{r}
+# Get data:
+library(gapminder)
+ 
+# Charge libraries:
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+
+# Make a ggplot, but add frame=year: one image per year
+ggplot(gapminder, aes(pop, lifeExp,color = continent)) +
+  geom_point() +
+  scale_x_log10() +
+  theme_bw() +
+  # gganimate specific bits:
+  labs(title = 'Year: {frame_time}', x = 'Population', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+
+```
+
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/hxy8yju2jdobstnqbmq9.gif)
+
+Analyzing life expectancy in relation to population trends across various years in a selection of randomly chosen countries.
+
+```{r}
+# List of countries you want to select
+selected_countries <- c("Algeria","Cameroon","Central African Republic","Egypt","Morocco","Argentina","Brazil","Canada","Mexico","United States","China",
+"India","Japan","Korea, Rep.","Singapore","France","Germany","Netherlands","Spain","Switzerland","United Kingdom",
+"Australia","New Zealand"
+)
+
+# Filter the Gapminder dataset to only include the selected countries
+filtered_gapminder <- gapminder %>%
+  filter(country %in% selected_countries)
+
+ggplot(filtered_gapminder, aes(pop, lifeExp,color = country)) +
+  geom_point() +
+  scale_x_log10() +
+  theme_bw() +
+  # gganimate specific bits:
+  labs(title = 'Year: {frame_time}', x = 'Population', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+
+```
+![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/fm3ojrnnpoqpbllih6cd.gif)
+
+
+
