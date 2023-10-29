@@ -7,8 +7,8 @@ description: UMMMMMM
 image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697496291/waffle/cvw2xf6zmoebdtkgwcb6.png
 category: blog
 tags:
-  - crazy
-  - story
+  - R
+  - Life
 author: isaac
 math: true
 ---
