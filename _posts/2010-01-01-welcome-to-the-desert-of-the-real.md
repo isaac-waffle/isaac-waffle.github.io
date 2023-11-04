@@ -122,13 +122,11 @@ anim_plot
 
 This dynamic graph presents insightful information. Firstly, it highlights a significant reduction in infant mortality and a gradual decline in mortality rates among younger generations. What are the factors contributing to this decline in mortality?
 
-Advances in Healthcare: Over the decades, substantial progress has been made in medical science, healthcare infrastructure, and access to healthcare services. These advancements have translated into improved treatments, early disease detection, and overall better healthcare outcomes.
+Over the decades, substantial progress has been made in medical science, healthcare infrastructure, and access to healthcare services. These advancements have translated into improved treatments, early disease detection, and overall better healthcare outcomes.
 
-Disease Control: Switzerland, much like other developed nations, has made remarkable effort in controlling and preventing infectious diseases. Key initiatives, such as vaccination programs, public health campaigns, and sanitation improvements, have played pivotal roles in diminishing disease-related mortality.
+Switzerland has made remarkable effort in controlling and preventing infectious diseases. Key initiatives, such as vaccination programs, public health campaigns, and sanitation improvements, have played pivotal roles in diminishing disease-related mortality.
 
-Lifestyle and Behavior: Shifts in lifestyle choices, including decreased smoking rates, healthier habits, and increased physical activity, have significantly contributed to improved overall health and a reduced risk of chronic diseases.
-
-Additionally, it is noteworthy that one of the most crucial factors is the absence of war since Switzerland has enjoyed political stability and neutrality for many decades. This peaceful environment has not only preserved human lives but has also created a conducive atmosphere for economic prosperity, healthcare development, and overall well-being.
+Additionally, it is noteworthy that one of the most crucial factors is the absence of war since Switzerland has political stability and neutrality for many decades. This peaceful environment has not only preserved human lives but has also created a conducive atmosphere for economic prosperity, healthcare development, and overall well-being.
 
 
 
@@ -261,21 +259,17 @@ Moving_Graph + transition_time(life_table_d$Year)
 
 Analyzing life expectancy in relation to population trends across various years in different continent.
 
-```{r}
-# Get data:
+```{r} 
+# Necessary libraries:
 library(gapminder)
- 
-# Charge libraries:
 library(ggplot2)
 library(gganimate)
 library(dplyr)
 
-# Make a ggplot, but add frame=year: one image per year
 ggplot(gapminder, aes(pop, lifeExp,color = continent)) +
   geom_point() +
   scale_x_log10() +
   theme_bw() +
-  # gganimate specific bits:
   labs(title = 'Year: {frame_time}', x = 'Population', y = 'life expectancy') +
   transition_time(year) +
   ease_aes('linear')
@@ -301,7 +295,6 @@ ggplot(filtered_gapminder, aes(pop, lifeExp,color = country)) +
   geom_point() +
   scale_x_log10() +
   theme_bw() +
-  # gganimate specific bits:
   labs(title = 'Year: {frame_time}', x = 'Population', y = 'life expectancy') +
   transition_time(year) +
   ease_aes('linear')
