@@ -269,8 +269,8 @@ library(dplyr)
 
 ggplot(gapminder, aes(pop, lifeExp,color = continent)) +
   geom_point() +
-  scale_x_log10() +
   theme_bw() +
+  scale_x_log10() +
   labs(title = 'Year: {frame_time}', x = 'Population', y = 'life expectancy') +
   transition_time(year) +
   ease_aes('linear')
@@ -294,8 +294,8 @@ filtered_gapminder <- gapminder %>%
 
 ggplot(filtered_gapminder, aes(pop, lifeExp,color = country)) +
   geom_point() +
-  scale_x_log10() +
   theme_bw() +
+  scale_x_log10() +
   labs(title = 'Year: {frame_time}', x = 'Population', y = 'life expectancy') +
   transition_time(year) +
   ease_aes('linear')
