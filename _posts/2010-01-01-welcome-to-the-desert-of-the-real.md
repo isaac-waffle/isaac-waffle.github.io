@@ -20,7 +20,8 @@ Switzerland is renowned for its high standard of living, excellent healthcare sy
 
 ## Before we start
 
-I utilized data from the Human Mortality Database, available at www.mortality.org. Additionally, some R packages are necessary to create and display dynamic moving graphs.
+I utilized data from the Human Mortality Database, available at www.mortality.org. 
+Additionally, some R packages are necessary to create and display dynamic moving graphs.
 
 
 ```{r}
