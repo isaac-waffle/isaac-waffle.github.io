@@ -13,10 +13,8 @@ tags:
   - ABCD
 author: mranderson
 paginate: true
+published: false
 ---
-
-![myfile](https://github.com/isaac-waffle/isaac-waffle.github.io/blob/master/assets/img/life/test_123.gif)
-
 
 ## Inline HTML elements
 
