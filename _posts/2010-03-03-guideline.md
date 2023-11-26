@@ -13,7 +13,7 @@ tags:
   - ABCD
 author: mranderson
 paginate: true
-published: false
+published: true
 ---
 
 ## Inline HTML elements
