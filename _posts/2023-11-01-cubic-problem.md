@@ -146,7 +146,8 @@ As long as the stack is not empty:
 
 
 
-```{r}
+```python
+
 R = [0,6,2,4,3,5,1,7,8,10,9,11,12,13,15,14]
 U = [4,5,2,3,0,1,6,7,9,8,10,11,14,13,12,15]
 L = [7,1,5,3,4,2,6,0,11,9,10,8,13,12,14,15]
@@ -285,4 +286,4 @@ class CubeSolver:
 
     def max_moves(self) -> int:
         return nx.diameter(self._G)
-'''
+```
