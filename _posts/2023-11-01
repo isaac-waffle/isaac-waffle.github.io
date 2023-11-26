@@ -1,13 +1,13 @@
 ---
 date: 2023-10-01 12:26:40
 layout: post
-title: Human Mortality?!
-subtitle: Dynamic analyses of mortality
-description: life Insurance
+title: Cube with python
+subtitle: How to solve cubic with python?
+description: python
 image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697496291/waffle/cvw2xf6zmoebdtkgwcb6.png
 category: blog
 tags:
-  - R
+  - Python
   - Life
 author: isaac
 math: true
@@ -31,7 +31,7 @@ Let us first assume there are 6 **Faces** in cube.
 * `"D"` is the DOWN face (green when solved)
 * `"B"` is the BACK face (yellow when solved)
 
-The **MOVES** you can make with the cube are annotated as follows:
+The **MOVES**  with the cube are annotated as follows:
 * `"R"` turn the RIGHT face clockwise by a half-turn
 * `"U"` turn the UP face clockwise by a half-turn
 * `"L"` turn the LEFT face clockwise by a half-turn
@@ -39,14 +39,14 @@ The **MOVES** you can make with the cube are annotated as follows:
 
 A **SCRAMBLE** is a suite of moves, such as `"RURLDU"`.
 
-We represent a face by a 4-letter code (for faces with 4 tiles: FRONT, BACK) or a 2-letter code (for faces with 2 tiles).
+I represent a face by a 4-letter code (for faces with 4 tiles: FRONT, BACK) or a 2-letter code (for faces with 2 tiles).
 * Each letter stands for a color: `"R" (red), "G" (green), "B" (blue), "Y" (yellow), "W" (white), "O" (orange)`
 * Colors appear in this order: top-left, top-right, bottom-left, bottom-right
 * In the solved state, the front face is encoded as `"WWWW"`
 * At the end of the `"R"` move, the front face is encoded as `"WYWY"`
 * If the `"Z"` tile was colored Red, the encoding after the move `"L"` would be `YWYR`
 
-We represent a cube as a dictionary:
+I represent a cube as a dictionary:
 * Keys are 1-letter code for the faces (see above)
 * values are 2- or 4-letter code for the colors
 
@@ -54,7 +54,7 @@ This dictionary can be turned into a single string:
 * concatenate all 4-letter and 2-letter codes, in the following key order: `"FBUDLR"`
 * The solved state results in the string `"WWWWYYYYBBGGOORR"`
 
-The moves are represented as position permutations of this string, you can find it in the code delimited by `### DO NOT CHANGE` 
+The moves are represented as position permutations of this string.
 * Given a text representation of the dictionary (such as `x = "WWWWYYYYBBGGOORR"`)
 * the return value of `apply(x, move="U")` is the string representation of the cube AFTER doing the move `"U"`
 
@@ -65,18 +65,17 @@ There are 2 additional dictionaries:
 ## TODO
 * `solved_cube` returns the dictionary corresponding to the solved cube
 
-
 * `CubeState` represents one cube in a specific state
   * Here, I used `dataclass`
   * There is one non-mandatory attribute `faces`:
     * it is a dictionary representing the cube.
     * the default value corresponds to the solved cube, as seen on the diagram
     * use the argument `default_factory` of the function `field` to achieve this without the need for `__post_init__`
-  * add the dunder method corresponding to `repr`
+  * Add the dunder method corresponding to `repr`
     * return the string representation of the dictionary `faces`
-  * add the dunder method corresponding to `hash`
+  * Add the dunder method corresponding to `hash`
     * return the result of calling the `hash` on the string representation of the dictionary
-  * add a method `move` with one argument: the move to execute (a string) 
+  * Add a method `move` with one argument: the move to execute (a string) 
     * return a new object `CubeState` with the state of the cube AFTER the move (use the function `apply` as explained above)
     * assume the existence of a function `from_repr` that can generate a CubeState object from its text representation
 
@@ -97,7 +96,7 @@ There are 2 additional dictionaries:
     * return the cube itself
 
 
-* Code a function `generate_graph` that returns a networkx directed graph
+* `generate_graph`  returns a networkx directed graph
   * This is the graph with all possible states of a cube
   * Nodes in the graph are objects `CubeState`
   * Each edge represents a single move from one state to another, it is directed from a state to the state AFTER the move
@@ -127,9 +126,9 @@ As long as the stack is not empty:
 
 ```
 
-* Code a class `Solution`, using `dataclass`, with attributes `moves` (string) and `time` (integer), and no method
+* Class `Solution`, using `dataclass`,  attributes `moves` (string) and `time` (integer), and no method
 
-* Code a class `CubeSolver` that has one non-init argument `_G` of type networkx directed graph
+* A class `CubeSolver` has one non-init argument `_G` of type networkx directed graph
   * the value of `_G` is the result of calling `generate_graph`
   * Use `default_factory` to avoid having `__post_init__`
   * implement the dunder method for using an object as function `x = CubeSolver(); x(cube_to_solve)`
