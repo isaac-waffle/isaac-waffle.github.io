@@ -16,8 +16,8 @@ math: true
 Ah, the Rubik's Cube – a childhood favorite that's both simple and oh-so-tricky.
 I've spent countless hours fiddling with those colorful squares, attempting to crack the code.
 But here's the thing: while I could easily get one side all nice and uniform, as soon as I tried to sort out the rest, it was like a whirlwind of chaos, and my perfect side was a jumble once more.
-The Rubik's Cube, with its myriad variations, comes in all sorts of shapes and sizes. 
-But for this blog post, I'm focusing on the classic 3x3 cube.
+
+The Rubik's Cube, with its myriad variations, comes in all sorts of shapes and sizes. But for this blog post, I'm focusing on the classic 3x3 cube.
 I'll be diving into the world of Python, exploring the potential moves using nodes and edges, and using that knowledge to conquer the cube. 
 It's kind of mind-blowing to think that through programming, we can crack the puzzle that's left many of us stumped.
 I mean, if I couldn't quite solve it manually, the fact that code might hold the key is pretty mind-boggling!
