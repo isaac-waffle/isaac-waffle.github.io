@@ -1,5 +1,5 @@
 ---
-date: 2023-10-01 12:26:40
+date: 2023-11-01 12:26:40
 layout: post
 title: Human Mortality?!
 subtitle: Dynamic analyses of mortality
