@@ -2,9 +2,9 @@
 date: 2023-09-01 12:26:40
 layout: post
 title: The Magic of Word Embeddings in Natural Language Processing
-subtitle: 
+subtitle: Word2Vec
 description: Text Retreival
-image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697496291/waffle/cvw2xf6zmoebdtkgwcb6.png
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859657/waffle/w1domtic8lv4q7mvrdrt.webp
 category: blog
 tags:
   - R
@@ -14,9 +14,6 @@ tags:
 author: isaac
 math: true
 ---
-
-
-![](https://res.cloudinary.com/dolc0vg7w/image/upload/v1698584464/waffle/life/fm3ojrnnpoqpbllih6cd.gif)
 
 ## The Magic of Word Embeddings in Natural Language Processing
 
