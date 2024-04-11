@@ -4,7 +4,7 @@ layout: post
 title: Human Mortality?!
 subtitle: Dynamic analyses of mortality
 description: life Insurance
-image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1697496291/waffle/cvw2xf6zmoebdtkgwcb6.png
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859657/waffle/q8cvyllqe3pxn3ayfecq.webp
 category: blog
 tags:
   - R
