@@ -9,6 +9,8 @@ category: blog
 tags:
   - R
   - Life
+  - Mortality
+  - Risk
 author: isaac
 math: true
 ---
