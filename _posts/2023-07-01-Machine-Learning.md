@@ -1,5 +1,5 @@
 ---
-date: 2023-08-01 12:26:40
+date: 2023-07-01 12:26:40
 layout: post
 title: Unveiling the Power of Machine Learning: A Transformative Approach to Artificial Intelligence
 subtitle: 
