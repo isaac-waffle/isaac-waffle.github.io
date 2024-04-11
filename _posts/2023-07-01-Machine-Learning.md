@@ -2,7 +2,6 @@
 date: 2023-07-01 12:26:40
 layout: post
 title: Unveiling the Power of Machine Learning: A Transformative Approach to Artificial Intelligence
-subtitle: 
 description: python
 image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1701024441/waffle/cube/guw5azsynec16hajrjsw.png
 category: blog
