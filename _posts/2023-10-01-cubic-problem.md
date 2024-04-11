@@ -8,7 +8,8 @@ image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859657/waffle/lx9r
 category: blog
 tags:
   - Python
-  - Life
+  - Puzzle
+  - Algorithm
 author: isaac
 math: true
 ---
