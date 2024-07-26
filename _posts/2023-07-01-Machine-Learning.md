@@ -4,7 +4,7 @@ layout: post
 title: Unveiling the Power of Machine Learning- A Transformative Approach to Artificial Intelligence
 subtitle: Leading to future Data Science
 description: python
-image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859657/waffle/w5fdxasi2y47kf6gfs2o.webp
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1721988618/waffle_2024/vuddxyh6skjm819l59vw.webp
 category: blog
 tags:
   - Python
