@@ -4,7 +4,7 @@ layout: post
 title: Cube with python
 subtitle: How to solve cubic with python?
 description: python
-image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859657/waffle/lx9rywtvmickdeemchsk.webp
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1721988966/waffle_2024/wxhj1okmbkn4jzbtcx7y.webp
 category: blog
 tags:
   - Python
