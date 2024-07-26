@@ -4,7 +4,7 @@ layout: post
 title: The Robust Versatility of Random Forest in Machine Learning
 subtitle: Innovation of Machine Learning
 description: python
-image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859131/waffle/jcg2hxgqzgmzomjg4k0b.webp
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1721988619/waffle_2024/sezend4koyouusiqs6xz.webp
 category: blog
 tags:
   - Python
