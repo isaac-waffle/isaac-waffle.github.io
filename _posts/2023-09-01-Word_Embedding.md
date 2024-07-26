@@ -4,7 +4,7 @@ layout: post
 title: The Magic of Word Embeddings in Natural Language Processing
 subtitle: Word2Vec
 description: Text Retreival
-image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1712859657/waffle/w1domtic8lv4q7mvrdrt.webp
+image: https://res.cloudinary.com/dolc0vg7w/image/upload/v1721988623/waffle_2024/x9urcyp9c4grnlcufbph.png
 category: blog
 tags:
   - R
